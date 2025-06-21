@@ -1,0 +1,4 @@
+calls_total_pre_sleep,sleep_quality,circadian_disruption_score,circadian_screen_misalignment,light_entropy_sleep,location_max_still_duration_sleep
+-0.7808688094430305,3,,,,
+1.12089707663561,5,0.3429198692650338,0.0013009553187785,-0.5390302388824281,1.2595885337166537
+0.1524985703326046,5,-0.745491045984359,,,

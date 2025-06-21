@@ -1,0 +1,4 @@
+screen_gap_before_sleep,screen_inter_event_std_pre_sleep,location_max_still_duration_sleep,sleep_quality,accel_entropy,calls_num_outgoing
+0.316227766016838,0.5716636668798164,0.4161734047384902,7,,
+,,,8,0.6036997391095713,-0.5656854249492381
+,,,8,-0.4444909241807612,
