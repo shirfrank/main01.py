@@ -39,6 +39,7 @@ def extract_from_tuple(obj):
     return obj[0] if isinstance(obj, tuple) else obj
 
 # === Stage 1: Clean & Extract Features ===
+all_features = []
 evaluations = []
 if run_clean_extract:
     for session in sessions:
@@ -101,22 +102,27 @@ if run_clean_extract:
                     ("WiFi", compute_wifi_features, [filter_df(wifi_df), windows]),
                     ("Location", compute_location_features, [filter_df(location_df), windows]),
                     ("Calls", compute_calls_features, [filter_df(calls_df), windows]),
-                    ("Circadian", compute_circadian_features, [filter_df(screen_df), filter_df(light_df), filter_df(accel_df), windows])
+                    ("Circadian", compute_circadian_features,
+                     [filter_df(screen_df), filter_df(light_df), filter_df(accel_df), windows])
                 ]
 
-                for name, func, args in extractors:
+                for feat_name, func, args in extractors:
                     try:
                         row_features.update(func(*args))
-                        print(f"✅ {name} features computed")
+                        print(f"✅ {feat_name} features computed")
                     except Exception as e:
-                        print(f"❌ Error in {name} features: {e}")
+                        print(f"❌ Error in {feat_name} features: {e}")
 
                 features_list.append(row_features)
 
-        features_df = pd.DataFrame(features_list)
-        output_path = f"features_session_{name}.csv"
-        features_df.to_csv(output_path, index=False)
-        print(f"✅ Features saved to {output_path}")
+        # After each session
+        all_features.extend(features_list)
+
+    # After all sessions
+    if all_features:
+        features_df = pd.DataFrame(all_features)
+        features_df.to_csv("x_features.csv", index=False)
+        print("✅ All features aggregated and saved to x_features.csv")
 
     if evaluations:
         eval_df = pd.DataFrame(evaluations)

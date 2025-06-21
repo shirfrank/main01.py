@@ -78,7 +78,8 @@ def estimate_sleep_wake_times(screen_df, light_df, accel_df, location_df, wifi_d
         score_df['wifi'] = wifi_score
 
     score_df['total_score'] = score_df.mean(axis=1)
-
+    print("[DEBUG] Sleep score percentiles:")
+    print(score_df['total_score'].describe())
     sleep_periods = score_df['total_score'] >= 0.6
     candidates = []
     current_start = None
